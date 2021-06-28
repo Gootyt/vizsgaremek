@@ -12,8 +12,11 @@
 **Felhasználói történet:**
 > _Különböző médiák listázása és szerkesztése._
 - ### 2.1 Könyvek
+- Fejlécek: szerző vezetékneve, szerző keresztneve, könyv címe, oldalszám, kötés, eto-szám
 - ### 2.2 Cd-k
+- Fejlécek: Előadó, cím, hossz
 - ### 2.3 DVD-k
+- Fejlécek: Cím, hossz
 
 
 **Elfogadási kritérium:**
