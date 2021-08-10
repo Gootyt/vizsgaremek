@@ -3,7 +3,7 @@
 
 ## 1. Főoldal
 **Felhasználói történet:**
-> _A főoldal egy üdvözlő képernyő statisztikával, új és népszerű könyvekkel._
+> _A főoldal egy üdvözlő képernyővel.
 
 **Elfogadási kritérium:**
 - Navigációs képesség a oldalakra.
@@ -12,11 +12,9 @@
 **Felhasználói történet:**
 > _Különböző médiák listázása és szerkesztése._
 - ### 2.1 Könyvek
-- Fejlécek: szerző vezetékneve, szerző keresztneve, könyv címe, oldalszám, kötés, eto-szám
 - ### 2.2 Cd-k
-- Fejlécek: Előadó, cím, hossz
-- ### 2.3 DVD-k
-- Fejlécek: Cím, hossz
+- ### 2.3 Magazinok
+
 
 
 **Elfogadási kritérium:**
@@ -36,16 +34,6 @@
 - A felhasználó tudja rendezni a táblázat oszlopait növekvő, illetve csökkenő sorrendbe. 
 - Responsive megjelenés.
 ## 4. Kölcsönzések kezelése
-**Felhasználói történet:**
-> _Kölcsönzések listázása és szerkesztése._
-
-**Elfogadási kritérium:**
-- A táblázat felett lévő gombra kattintva legyen lehetőség új elem felvételére.
-- Lehessen törölni és módosítani a táblázat tartalmát. 
-- Lehessen kategóriák szerint keresni a táblázat tartalmán belül.
-- A felhasználó tudja rendezni a táblázat oszlopait növekvő, illetve csökkenő sorrendbe. 
-- Responsive megjelenés.
-## 5. Könyvbeszerzések kezelése
 **Felhasználói történet:**
 > _Kölcsönzések listázása és szerkesztése._
 

@@ -6,8 +6,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
+const cors = require('./config/cors');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+const fsp = require('fs').promises;
 
 // Authenctication.
 const authenticateJwt = require('./auth/authenticate');
@@ -28,6 +30,7 @@ mongoose
         process.exit();
     });
 
+app.use(cors());
 app.use(morgan('combined', {stream: logger.stream}));
 app.use(express.static('public'));
 app.use(bodyParser.json());
