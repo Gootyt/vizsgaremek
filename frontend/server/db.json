@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "_id": "60f2dc77713d417ff90fefeb",
+      "firstName": "Joe",
+      "lastName": "Firpo",
+      "email": "joe@gmail.com",
+      "address": "address",
+      "active": true,
+      "password": "$2a$10$66MHOO46HvSEwoI/XzznbepQSTbt3./rkj9YNto0/UEh0Te9fy.1u"
+    },
+    {
+      "_id": "611920eafc13ae5359000c1f",
+      "firstName": "Cyndi",
+      "lastName": "Hursthouse",
+      "email": "chursthouse0@slate.com",
+      "address": "Kisumu",
+      "active": false
+    },
+    {
+      "_id": "611920eafc13ae5359000c20",
+      "firstName": "Torry",
+      "lastName": "Virgoe",
+      "email": "tvirgoe1@columbia.edu",
+      "address": "Oeba",
+      "active": true
+    }
+  ],
+  "loans": [
+    {
+      "_id": "fasfdasfasdffff532423515",
+      "borrower": "Joe",
+      "loanedbook": "Firpo",
+      "loandate": 100,
+      "loanend": 50
+    }
+  ],
+  "books": [
+    {
+      "_id": "fasfdasfasdffff543242315",
+      "writer": "Szabó István",
+      "title": "könyv",
+      "length": "229",
+      "style": "action",
+      "onloan": false
+    }
+  ],
+  "cds": [
+    {
+      "_id": "fasfdasfasdffff58568423515",
+      "performer": "Előadó",
+      "title": "lemez",
+      "length": 45,
+      "style": "pop"
+    }
+  ],
+  "magazines": [
+    {
+      "_id": "fasfdasfasdffff58568423515",
+      "title": "Chip magazin",
+      "year": "2001",
+      "month": 10,
+      "description": "valami"
+    }
+  ]
+}

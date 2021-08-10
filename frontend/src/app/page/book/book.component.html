@@ -1,0 +1,8 @@
+<div class="container-fluid px-4">
+  <h1 class="mt-4">Books</h1>
+  <app-datatable
+    [tableColumns]="tableColumns"
+    [list$]="list$"
+    (selectOne)="onSelectOne($event)"
+  ></app-datatable>
+</div>
