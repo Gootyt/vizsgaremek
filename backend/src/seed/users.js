@@ -7,7 +7,7 @@ module.exports = [{
     "address": "NY",
     "active": true
 }, {
-  "_id": "611b0928fc13ae48fd000005"
+  "_id": "611b0928fc13ae48fd000005",
   "firstname": "Mai",
   "lastname": "Stych",
   "email": "estych0@cocolog-nifty.com",
@@ -15,7 +15,7 @@ module.exports = [{
   "address": "Voronkov",
   "active": true
 }, {
-  "_id": "611b0928fc13ae48fd000006"
+  "_id": "611b0928fc13ae48fd000006",
   "firstname": "Naelle",
   "lastname": "de Broke",
   "email": "sdebroke1@mediafire.com",
@@ -23,7 +23,7 @@ module.exports = [{
   "address": "Langtang",
   "active": false
 }, {
-  "_id": "611b0928fc13ae48fd000007"
+  "_id": "611b0928fc13ae48fd000007",
   "firstname": "Andrée",
   "lastname": "Sherlock",
   "email": "bsherlock2@admin.ch",
@@ -31,7 +31,7 @@ module.exports = [{
   "address": "Jiangwakou",
   "active": false
 }, {
-  "_id": "611b0928fc13ae48fd000008"
+  "_id": "611b0928fc13ae48fd000008",
   "firstname": "Valérie",
   "lastname": "Wooller",
   "email": "swooller3@is.gd",
