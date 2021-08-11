@@ -2,20 +2,25 @@ const app = require('./server');
 const mongoose = require('mongoose');
 const supertest = require('supertest');
 const config = require('config');
-const Person = require('./models/person.model');
+const User = require('./models/user.model');
 const { response } = require('express');
+const adminOnly = require('./auth/adminOnly');
 
-describe('REST API integration tests', () => {
+describe.skip('REST API integration tests', () => {
     const insertData = [
         {
             firstName: 'John',
             lastName: 'Test',
-            email: 'john@test.com'
+            email: 'john@test.com',
+            active: true,
+            role: 'admin', 
         },
         {
             firstName: 'Kate',
             lastName: 'Test',
-            email: 'kate@test.com'
+            email: 'kate@test.com',
+            active: true,
+            role: 'user', 
         }
     ];
 
@@ -30,7 +35,7 @@ describe('REST API integration tests', () => {
                 done();
             })
             .catch(err => {
-                logger.error(err);
+                console.error(err);
                 process.exit();
             });
     });
@@ -41,34 +46,33 @@ describe('REST API integration tests', () => {
         });
     });
 
-    test('GET /person', () => {
-        return Person.insertMany(insertData)
-            .then(() => supertest(app).get('/person').expect(200))
+    test('GET /user', () => {
+        return User.insertMany(insertData)
+            .then(() => supertest(app).get('/user').expect(200))
             .then(response => {
                 expect(Array.isArray(response.body)).toBeTruthy();
                 expect(response.body.length).toEqual(insertData.length);
 
-                response.body.forEach((person, index) => {
-                    expect(person.firstName).toBe(insertData[index].firstName);
-                    expect(person.lastName).toBe(insertData[index].lastName);
-                    expect(person.email).toBe(insertData[index].email);
+                response.body.forEach((user, index) => {
+                    expect(user.firstName).toBe(insertData[index].firstName);
+                    expect(user.lastName).toBe(insertData[index].lastName);
+                    expect(user.email).toBe(insertData[index].email);
+                    expect(user.active).toBe(insertData[index].active);
+                    expect(user.role).toBe(insertData[index].role);
                 });
             });
 
     });
 
-    test('GET /person/:id', () => {
-        let firstPostId;
-        return Person.insertMany(insertData)
-            .then(people => {
-                firstPostId = people[0]._id;
-                return supertest(app).get(`/person/${firstPostId}`).expect(200);
-            })
+    test('GET /user/:id', () => {
+        return User.insertMany(insertData)
             .then(response => {
-                const person = response.body;
-                expect(person.firstName).toBe(insertData[0].firstName);
-                expect(person.lastName).toBe(insertData[0].lastName);
-                expect(person.email).toBe(insertData[0].email);
+                const user = response.body;
+                expect(user.firstName).toBe(insertData[0].firstName);
+                expect(user.lastName).toBe(insertData[0].lastName);
+                expect(user.email).toBe(insertData[0].email);
+                expect(user.active).toBe(insertData[0].active);
+                expect(user.role).toBe(insertData[0].role);
             });
     });
 });

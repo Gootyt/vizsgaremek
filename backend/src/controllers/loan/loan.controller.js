@@ -2,34 +2,21 @@ const express = require('express');
 const createError = require('http-errors');
 
 const loanService = require('./loan.service');
-const loanModel = require('../../models/loan.model');
-const loanService = baseService(loanModel, ['user', 'book']);
-
-const checkModel = (model, body, next) => {
-    const validationErrors = new model(body).validateSync();
-    if (validationErrors) {
-        next(
-            new createError.BadRequest(
-                JSON.stringify({
-                    message: 'Scmema validation error',
-                    error: validationErrors
-                })
-            )
-        );
-        return false;
-    }
-    return true;
-};
 
 // Create a new loan.
 exports.create = (req, res, next) => {
-    if (!checkModel(loanModel, req.body, next)) {
-        return;
+    const { borrower, loanedbook, loandate, loanend } = req.body;
+    if (!borrower || !loanedbook) {
+        return next(
+            new createError.BadRequest("Missing properties!")
+        );
     }
-    const { user, book} = req.body;
 
     const newLoan = {
-        user, book: book || ''
+        borrower: borrower,
+        loanedbook: loanedbook,
+        loandate: loandate,
+	loanend: loanend
     };
 
     return loanService.create(newLoan)
@@ -42,8 +29,8 @@ exports.create = (req, res, next) => {
 
 exports.findAll = (req, res, next) => {
     return loanService.findAll()
-        .then( loans => {
-            res.json(loans);
+        .then( people => {
+            res.json(people);
         });
 };
 
@@ -59,11 +46,20 @@ exports.findOne = (req, res, next) => {
 
 exports.update = (req, res, next) => {
     const id = req.params.id;
-    if (!checkModel(loanModel, req.body, next)) {
-        return;
+    const { borrower, loanedbook, loandate, loanend } = req.body;
+    if (!borrower || !loanedbook) {
+        return next(
+            new createError.BadRequest("Missing properties!")
+        );
     }
 
-    return loanService.update(req.params.id, req.body)
+    const update = {
+        borrower: borrower,
+        loanedbook: loanedbook,
+        loandate: loandate,
+	loanend: loanend
+    };
+    return loanService.update(req.params.id, update)
         .then(loan => {
             res.json(loan);
         })
@@ -78,4 +74,4 @@ exports.delete = (req, res, next) => {
         .catch( err => {
             next(new createError.InternalServerError(err.message));
         } );
-}; 
+};

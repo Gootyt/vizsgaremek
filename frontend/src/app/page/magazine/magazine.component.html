@@ -1,6 +1,17 @@
 <div class="container-fluid px-4">
     <h1 class="mt-4">Magazines</h1>
-        <app-datatable
-         [tableColumns]="tableColumns"
-         [list$]="list$"></app-datatable>
+    <div class="row">
+      <div class="col-12 d-grid mt-3 mb-3">
+        <button routerLink="/magazines/create" class="btn btn-success w-100">
+          New Magazine
+        </button>
+      </div>
     </div>
+  
+    <app-data-table
+      [tableColumns]="tableColumns"
+      [list$]="list$"
+      (selectOne)="onSelectOne($event)">
+    </app-data-table>
+  </div>
+  

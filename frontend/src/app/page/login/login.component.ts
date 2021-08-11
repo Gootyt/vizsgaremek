@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   setPassword(): void {
-    this.userService.update({_id: '60f2dc77713d417ff90fefeb', password: 'test'})
+    this.userService.update({_id: 'fasfdasfasdffff541515', password: 'test'})
       .subscribe( resp => console.log(resp) );
   }
 

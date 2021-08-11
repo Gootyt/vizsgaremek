@@ -5,9 +5,9 @@ exports.create = loanData => {
     return loan.save();
 };
 
-exports.findAll = () => Loan.find().populate('user', 'book');
+exports.findAll = () => Loan.find().populate('user', 'books');
 
-exports.findOne = id => Loan.findById(id).populate('user').populate('user', 'book');
+exports.findOne = id => Loan.findById(id).populate('user', 'books');
 
 exports.update = (id, updateData) => Loan.findByIdAndUpdate(id, updateData, {new: true});
 

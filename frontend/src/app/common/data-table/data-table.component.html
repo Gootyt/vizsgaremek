@@ -1,0 +1,40 @@
+<div class="card mb-4">
+  <div class="card-header">
+    </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th *ngFor="let col of tableColumns"> {{ col.title }} </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <th *ngFor="let col of tableColumns"> {{ col.title }} </th>
+          <th></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr *ngFor="let row of list$ | async">
+          <td *ngFor="let col of tableColumns">
+            <span *ngIf="!col.htmlOutput; else elseBlock">
+              {{ row[col.key] | xPipe:col.pipes:col.pipeArgs }}
+            </span>
+            <ng-template #elseBlock>
+              <span [innerHTML]="col.htmlOutput(row[col.key])"></span>
+            </ng-template>
+          </td>
+          <td>
+            <div class="btn-group">
+              <!-- 3. -->
+              <button (click)="onSelect(row)" class="btn btn-info">
+                <i class="fas fa-pencil-alt"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

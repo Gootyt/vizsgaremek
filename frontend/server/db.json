@@ -61,6 +61,13 @@
       "year": "2001",
       "month": 10,
       "description": "valami"
+    },
+    {
+      "title": "magazin",
+      "year": 2000,
+      "month": "12",
+      "description": 4,
+      "_id": "zGxGxNJ"
     }
   ]
 }

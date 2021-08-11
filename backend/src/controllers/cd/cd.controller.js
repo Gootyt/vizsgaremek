@@ -1,29 +1,18 @@
 const express = require('express');
 const createError = require('http-errors');
 
-const cdService = require('./cd.service');
+const Model = require('../../models/cd.model');
+const service = require('./cd.service');
 
-// performer: String,
-//     title: String,
-//     length: Number,
-//     style: String,
-
-// Create a new cd.
 exports.create = (req, res, next) => {
-    const { title } = req.body;
-    if (!title) {
+    const validationErrors = new Model(req.body).validateSync();
+    if (validationErrors) {
         return next(
-            new createError.BadRequest("Missing properties!")
+            new createError.BadRequest(validationErrors)
         );
     }
 
-    const newCd = {
-        firstName: first_name,
-        lastName: last_name,
-        email: email
-    };
-
-    return cdService.create(newCd)
+    return service.create(req.body)
         .then(cp => {
             res.status(201);
             res.json(cp);
@@ -32,39 +21,33 @@ exports.create = (req, res, next) => {
 };
 
 exports.findAll = (req, res, next) => {
-    return cdService.findAll()
-        .then( people => {
-            res.json(people);
+    return service.findAll()
+        .then( entity => {
+            res.json(entity);
         });
 };
 
 exports.findOne = (req, res, next) => {
-    return cdService.findOne(req.params.id)
-        .then( cd => {
-            if (!cd) {
+    return service.findOne(req.params.id)
+        .then( entity => {
+            if (!entity) {
                 return next(new createError.NotFound("Cd is not found"));
             }
-            return res.json(cd);
+            return res.json(entity);
         });
 };
 
 exports.update = (req, res, next) => {
-    const id = req.params.id;
-    const { first_name, last_name, email } = req.body;
-    if (!last_name || !first_name || !email) {
+    const validationErrors = new Model(req.body).validateSync();
+    if (validationErrors) {
         return next(
-            new createError.BadRequest("Missing properties!")
+            new createError.BadRequest(validationErrors)
         );
     }
 
-    const update = {
-        firstName: first_name,
-        lastName: last_name,
-        email: email
-    };
-    return cdService.update(req.params.id, update)
-        .then(cd => {
-            res.json(cd);
+    return service.update(req.params.id, req.body)
+        .then(entity => {
+            res.json(entity);
         })
         .catch( err => {
             next(new createError.InternalServerError(err.message));
@@ -72,7 +55,7 @@ exports.update = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    return cdService.delete(req.params.id)
+    return service.delete(req.params.id)
         .then( () => res.json({}) )
         .catch( err => {
             next(new createError.InternalServerError(err.message));

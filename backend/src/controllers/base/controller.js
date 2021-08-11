@@ -22,7 +22,7 @@ const checkModel = (model, body, next) => {
 module.exports = (model, populates = []) => {
     const currentService = baseService(model, populates);
     return {
-        // Create a new person.
+       
         create: (req, res, next) => {
             if (!checkModel(model, req.body, next)) {
                 return;
@@ -38,18 +38,18 @@ module.exports = (model, populates = []) => {
         
         findAll: (req, res, next) => {
             return currentService.findAll()
-                .then( orders => {
-                    res.json(orders);
+                .then( cds => {
+                    res.json(cds);
                 });
         },
         
         findOne: (req, res, next) => {
             return currentService.findOne(req.params.id)
-                .then( order => {
-                    if (!order) {
-                        return next(new createError.NotFound("Order is not found"));
+                .then( entity => {
+                    if (!entity) {
+                        return next(new createError.NotFound("Entity is not found"));
                     }
-                    return res.json(order);
+                    return res.json(entity);
                 });
         },
         
@@ -60,8 +60,8 @@ module.exports = (model, populates = []) => {
             }
         
             return currentService.update(req.params.id, req.body)
-                .then(person => {
-                    res.json(person);
+                .then(entity => {
+                    res.json(entity);
                 })
                 .catch( err => {
                     next(new createError.InternalServerError(err.message));

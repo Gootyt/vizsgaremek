@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Magazine } from 'src/app/model/magazine';
-import { ITableColumn, ConfigService } from 'src/app/service/config.service';
+import { ConfigService, ITableColumn } from 'src/app/service/config.service';
 import { MagazineService } from 'src/app/service/magazine.service';
 
 @Component({
@@ -16,10 +17,14 @@ export class MagazineComponent implements OnInit {
 
   constructor(
     private config: ConfigService,
-    private magazineService: MagazineService
+    private magazineService: MagazineService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
+  }
+
+  onSelectOne(magazine: Magazine): void {
   }
 
 }

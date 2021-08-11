@@ -1,24 +1,18 @@
 const express = require('express');
 const createError = require('http-errors');
 
-const magazineService = require('./magazine.service');
+const Model = require('../../models/magazine.model');
+const service = require('./magazine.service');
 
-// Create a new magazine.
 exports.create = (req, res, next) => {
-    const { last_name, first_name, email } = req.body;
-    if (!last_name || !first_name || !email) {
+    const validationErrors = new Model(req.body).validateSync();
+    if (validationErrors) {
         return next(
-            new createError.BadRequest("Missing properties!")
+            new createError.BadRequest(validationErrors)
         );
     }
 
-    const newMagazine = {
-        firstName: first_name,
-        lastName: last_name,
-        email: email
-    };
-
-    return magazineService.create(newMagazine)
+    return service.create(req.body)
         .then(cp => {
             res.status(201);
             res.json(cp);
@@ -27,39 +21,33 @@ exports.create = (req, res, next) => {
 };
 
 exports.findAll = (req, res, next) => {
-    return magazineService.findAll()
-        .then( magazines => {
-            res.json(magazines);
+    return service.findAll()
+        .then( entity => {
+            res.json(entity);
         });
 };
 
 exports.findOne = (req, res, next) => {
-    return magazineService.findOne(req.params.id)
-        .then( magazine => {
-            if (!magazine) {
-                return next(new createError.NotFound("Magazine is not found"));
+    return service.findOne(req.params.id)
+        .then( entity => {
+            if (!entity) {
+                return next(new createError.NotFound("Person is not found"));
             }
-            return res.json(magazine);
+            return res.json(entity);
         });
 };
 
 exports.update = (req, res, next) => {
-    const id = req.params.id;
-    const { first_name, last_name, email } = req.body;
-    if (!last_name || !first_name || !email) {
+    const validationErrors = new Model(req.body).validateSync();
+    if (validationErrors) {
         return next(
-            new createError.BadRequest("Missing properties!")
+            new createError.BadRequest(validationErrors)
         );
     }
 
-    const update = {
-        firstName: first_name,
-        lastName: last_name,
-        email: email
-    };
-    return magazineService.update(req.params.id, update)
-        .then(magazine => {
-            res.json(magazine);
+    return service.update(req.params.id, req.body)
+        .then(entity => {
+            res.json(entity);
         })
         .catch( err => {
             next(new createError.InternalServerError(err.message));
@@ -67,7 +55,7 @@ exports.update = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    return magazineService.delete(req.params.id)
+    return service.delete(req.params.id)
         .then( () => res.json({}) )
         .catch( err => {
             next(new createError.InternalServerError(err.message));

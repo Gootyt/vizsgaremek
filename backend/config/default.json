@@ -1,7 +1,7 @@
 {
     "database": {
         "username": "admin",
-        "password": "adminpw",
+        "password": "admin_pw",
         "host": "cluster0.kpnt8.mongodb.net/db?retryWrites=true&w=majority"
     }
 }

@@ -7,12 +7,12 @@ import { ConfigService } from './config.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoanService extends BaseService <Loan> {
+export class LoanService extends BaseService<Loan> {
 
   constructor(
     public config: ConfigService,
-    public http: HttpClient
-  ) { 
+    public http: HttpClient,
+  ) {
     super(config, http);
     this.entity = 'loans';
   }

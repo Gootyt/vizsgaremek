@@ -1,24 +1,26 @@
 const express = require('express');
 const createError = require('http-errors');
 
-const personService = require('./person.service');
+const userService = require('./user.service');
 
-// Create a new person.
+// Create a new user.
 exports.create = (req, res, next) => {
-    const { last_name, first_name, email } = req.body;
+    const { last_name, first_name, email, active, address } = req.body;
     if (!last_name || !first_name || !email) {
         return next(
             new createError.BadRequest("Missing properties!")
         );
     }
 
-    const newPerson = {
+    const newUser = {
         firstName: first_name,
         lastName: last_name,
-        email: email
+        email: email,
+        active: active,
+        address: address,
     };
 
-    return personService.create(newPerson)
+    return userService.create(newUser)
         .then(cp => {
             res.status(201);
             res.json(cp);
@@ -27,19 +29,19 @@ exports.create = (req, res, next) => {
 };
 
 exports.findAll = (req, res, next) => {
-    return personService.findAll()
+    return userService.findAll()
         .then( people => {
             res.json(people);
         });
 };
 
 exports.findOne = (req, res, next) => {
-    return personService.findOne(req.params.id)
-        .then( person => {
-            if (!person) {
-                return next(new createError.NotFound("Person is not found"));
+    return userService.findOne(req.params.id)
+        .then( user => {
+            if (!user) {
+                return next(new createError.NotFound("User is not found"));
             }
-            return res.json(person);
+            return res.json(user);
         });
 };
 
@@ -55,11 +57,13 @@ exports.update = (req, res, next) => {
     const update = {
         firstName: first_name,
         lastName: last_name,
-        email: email
+        email: email,
+        active: active,
+        address: address,
     };
-    return personService.update(req.params.id, update)
-        .then(person => {
-            res.json(person);
+    return userService.update(req.params.id, update)
+        .then(user => {
+            res.json(user);
         })
         .catch( err => {
             next(new createError.InternalServerError(err.message));
@@ -67,7 +71,7 @@ exports.update = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    return personService.delete(req.params.id)
+    return userService.delete(req.params.id)
         .then( () => res.json({}) )
         .catch( err => {
             next(new createError.InternalServerError(err.message));

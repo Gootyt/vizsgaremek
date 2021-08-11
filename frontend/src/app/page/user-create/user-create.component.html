@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-6 offset-3">
+    <form #userForm="ngForm" (ngSubmit)="onSave(userForm)">
+      <div class="form-group">
+        <label for="">First Name</label>
+        <input class="form-control" type="text" name="firstName" [(ngModel)]="user.firstname">
+      </div>
+      <div class="form-group">
+        <label for="">Last Name</label>
+        <input class="form-control" type="text" name="lastName" [(ngModel)]="user.lastname">
+      </div>
+      <div class="form-group">
+        <label for="">email</label>
+        <input class="form-control" type="email" name="email" [(ngModel)]="user.email">
+      </div>
+      <div class="form-group">
+        <label for="">Address</label>
+        <input class="form-control" type="text" name="address" [(ngModel)]="user.address">
+      </div>
+      <div class="form-group">
+        <label for="">Active</label>
+        <input type="checkbox" name="active" [(ngModel)]="user.active">
+      </div>
+
+      <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary w-100 mt-3 mb-3">
+        Create a new User
+      </button>
+    </form>
+  </div>
+</div>

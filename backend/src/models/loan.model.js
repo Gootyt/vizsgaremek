@@ -11,22 +11,16 @@ const LoanSchema = mongoose.Schema({
         ref: 'Book',
         required: true,
     },
-    loandate: Date,
-    loanend: Date,
-    posts: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Post'
-        }
-    ]
+    loandate: {
+        type: Date,
+        default: new Date(),
+    },
+    loanend: {
+        type: Date,
+        default: new Date(),
+    }
 }, {
     timestamps: true
 });
 
 module.exports = mongoose.model('Loan', LoanSchema);
-// export class Loan {
-//     _id: string = '';
-//     borrower: User = new User();
-//     loanedbook: Book = new Book();
-//     loandate: Date = new Date();
-//     loanend: Date = new Date();

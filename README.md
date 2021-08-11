@@ -1,6 +1,10 @@
 # **User Story - Adminisztrátori szerepkör**
 ## **Könyvtári nyilvántartó**
+Belépési adatok:
 
+Felhasználónév: admin@gmail.com
+
+Jelszó: admin_pw
 ## 1. Főoldal
 **Felhasználói történet:**
 > _A főoldal egy üdvözlő képernyővel.

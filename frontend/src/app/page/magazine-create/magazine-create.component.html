@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-6 offset-3">
+    <form #magazineForm="ngForm" (ngSubmit)="onSave(magazineForm)">
+      <div class="form-group">
+        <label for="">Title</label>
+        <input class="form-control" type="text" name="title" [(ngModel)]="magazine.title">
+      </div>
+      <div class="form-group">
+        <label for="">Year</label>
+        <input class="form-control" type="number" name="year" [(ngModel)]="magazine.year">
+      </div>
+      <div class="form-group">
+        <label for="">Month</label>
+        <input class="form-control" type="text" name="month" [(ngModel)]="magazine.month">
+      </div>
+      <div class="form-group">
+        <label for="">Description</label>
+        <input class="form-control" type="text" name="description" [(ngModel)]="magazine.description">
+      </div>
+
+      <button type="submit" [disabled]="magazineForm.invalid" class="btn btn-primary w-100 mt-3 mb-3">
+        Create a new Magazine
+      </button>
+    </form>
+  </div>
+</div>

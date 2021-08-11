@@ -1,25 +1,25 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Sample Blog API
-  description: A sample blog API to illustrate REST API concepts
+  title: Library API
+  description: API for accessing Library functionality
 servers:
   - url: http://localhost:3000
 paths:
-  /person:
+  /user:
     get:
-      description: Returns a list of persons
+      description: Returns a list of users
       security:
         - bearerAuth: []
       responses:
         '200':
-          description: List of persons returned successfully
+          description: List of users returned successfully
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Person'
+                  $ref: '#/components/schemas/User'
         '500':
           description: Internal server error
           content:
@@ -27,7 +27,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     post:
-      description: Creates a new person
+      description: Creates a new user
       security:
         - bearerAuth: []
       requestBody:
@@ -35,14 +35,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Person'
+              $ref: '#/components/schemas/User'
       responses:
         '201':
-          description: Person has been created successfully
+          description: User has been created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Person'
+                $ref: '#/components/schemas/User'
         '400':
           description: Invalid request
           content:
@@ -55,26 +55,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /person/{person_id}:
+  /user/{user_id}:
     get:
-      description: Returns the person with the given ID
+      description: Returns the user with the given ID
       security:
         - bearerAuth: []
       parameters:
-        - name: person_id
+        - name: user_id
           in: path
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: Person data returned successfully
+          description: User data returned successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Person'
+                $ref: '#/components/schemas/User'
         '404':
-          description: Person with the give ID was not found
+          description: User with the give ID was not found
           content:
             application/json:
               schema:
@@ -86,22 +86,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     put:
-      description: Update a person
+      description: Update a user
       security:
         - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Person'
+              $ref: '#/components/schemas/User'
       responses:
         '201':
-          description: Person has been updated successfully
+          description: User has been updated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Person'
+                $ref: '#/components/schemas/User'
         '400':
           description: Invalid request
           content:
@@ -114,6 +120,608 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete a user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: User has been deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /book:
+    get:
+      description: Returns a list of books
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of books returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new book
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: Book has been created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /book/{book_id}:
+    get:
+      description: Returns the book with the given ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: book_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Book data returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book with the give ID was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: Update a book
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: book_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: Book has been updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete a book
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: book_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Book has been deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /cd:
+    get:
+      description: Returns a list of cds
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of cds returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cd'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new cd
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cd'
+      responses:
+        '201':
+          description: Cd has been created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cd'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /cd/{cd_id}:
+    get:
+      description: Returns the cd with the given ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cd_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cd data returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cd'
+        '404':
+          description: Cd with the give ID was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: Update an cd
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cd_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cd'
+      responses:
+        '201':
+          description: Cd has been updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cd'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete an cd
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cd_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Cd has been deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cd'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /magazine:
+    get:
+      description: Returns a list of magazines
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of magazines returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Magazine'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new magazine
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Magazine'
+      responses:
+        '201':
+          description: Magazine has been created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Magazine'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /magazine/{magazine_id}:
+    get:
+      description: Returns the magazine with the given ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: magazine_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Magazine data returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Magazine'
+        '404':
+          description: Magazine with the give ID was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: Update a magazine
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: magazine_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Magazine'
+      responses:
+        '201':
+          description: Magazine has been updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Magazine'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete a magazine
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: magazine_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Magazine has been deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Magazine'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /loan:
+    get:
+      description: Returns a list of loans
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of loans returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Loan'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new loan
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Loan'
+      responses:
+        '201':
+          description: Loan has been created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Loan'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /loan/{loan_id}:
+    get:
+      description: Returns the loan with the given ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: loan_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Loan data returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Loan'
+        '404':
+          description: Loan with the give ID was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: Update a loan
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: loan_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Loan'
+      responses:
+        '201':
+          description: Loan has been updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Loan'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: Delete a loan
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: loan_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Loan has been deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Loan'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
 components:
   securitySchemes:
     bearerAuth:            # arbitrary name for the security scheme
@@ -121,11 +729,11 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
-    Person:
+    User:
       type: object
       required:
-        - first_name
-        - last_name
+        - firstName
+        - lastName
         - email
       properties:
         first_name:
@@ -134,23 +742,76 @@ components:
           type: string
         email:
           type: string
-        posts: 
-          type: array
-          items:
-            $ref: '#/components/schemas/Post'
-    Post:
+        address:
+          type: string
+        active:
+          type: boolean
+    Book:
+      type: object
+      required:
+        - writer
+        - title
+        - length
+        - onloan
+      properties:
+        writer:
+          type: string
+        title:
+          type: string
+        length:
+          type: number
+        style:
+          type: string
+        onloan:
+          type: boolean
+    Cd:
+      type: object
+      required:
+        - performer
+        - title
+        - length
+      properties:
+        performer:
+          type: string
+        title:
+          type: string
+        length:
+          type: number
+        style:
+          type: string
+    Magazine:
       type: object
       required:
         - title
-        - body
+        - year
+        - month
+        - description
       properties:
         title:
           type: string
-        body:
+        year:
+          type: number
+        month:
           type: string
-        author:
+        description:
+          type: string
+  
+    Loan:
+      type: object
+      required:
+        - borrower
+        - book
+      properties:
+        borrower:
           type: object
-          $ref: '#/components/schemas/Person'
+          $ref: '#/components/schemas/User'
+        book:
+            type: object
+            $ref: '#/components/schemas/Book'
+        loandate: 
+            type: string
+        loanend:
+            type: string
     Error:
       type: object
       required:

@@ -5,9 +5,9 @@ exports.create = magazineData => {
     return magazine.save();
 };
 
-exports.findAll = () => Magazine.find().populate('posts');
+exports.findAll = () => Magazine.find().populate();
 
-exports.findOne = id => Magazine.findById(id).populate('posts');
+exports.findOne = id => Magazine.findById(id).populate();
 
 exports.update = (id, updateData) => Magazine.findByIdAndUpdate(id, updateData, {new: true});
 

@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BookEditComponent } from './page/book-edit/book-edit.component';
-import { BookComponent } from './page/book/book.component';
-import { CdComponent } from './page/cd/cd.component';
-import { DashboardComponent } from './page/dashboard/dashboard.component';
-import { LoanComponent } from './page/loan/loan.component';
-import { LoginComponent } from './page/login/login.component';
+import { MagazineCreateComponent } from './page/magazine-create/magazine-create.component';
 import { MagazineComponent } from './page/magazine/magazine.component';
-import { UserComponent } from './page/user/user.component';
+import { DashboardComponent } from './page/dashboard/dashboard.component';
+import { LoginComponent } from './page/login/login.component';
+import { CdsComponent } from './page/cds/cds.component';
+import { BookEditComponent } from './page/book-edit/book-edit.component';
+import { BooksComponent } from './page/books/books.component';
+import { UsersComponent } from './page/users/users.component';
+import { LoansComponent } from './page/loans/loans.component';
+import { BookCreateComponent } from './page/book-create/book-create.component';
+import { UserEditComponent } from './page/user-edit/user-edit.component';
+import { UserCreateComponent } from './page/user-create/user-create.component';
 
 const routes: Routes = [
   {
@@ -16,27 +20,43 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    component: UserComponent,
+    component: UsersComponent,
+  },
+  {
+    path: 'users/edit/:id',
+    component: UserEditComponent,
+  },
+  {
+    path: 'users/create',
+    component: UserCreateComponent,
   },
   {
     path: 'books',
-    component: BookComponent,
+    component: BooksComponent,
   },
   {
     path: 'books/edit/:id',
     component: BookEditComponent,
   },
   {
-    path: 'cds',
-    component: CdComponent,
-  },
-  {
-    path: 'loans',
-    component: LoanComponent,
+    path: 'books/create',
+    component: BookCreateComponent,
   },
   {
     path: 'magazines',
     component: MagazineComponent,
+  },
+  {
+    path: 'magazines/create',
+    component: MagazineCreateComponent,
+  },
+  {
+    path: 'cds',
+    component: CdsComponent,
+  },
+  {
+    path: 'loans',
+    component: LoansComponent,
   },
   {
     path: 'login',

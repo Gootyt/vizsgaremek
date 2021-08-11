@@ -1,6 +1,35 @@
-<h3>Edit Book</h3>
 <div class="row">
-  <div class="col-6 offset-3">
-    <app-areus-form *ngIf="showForm" [fieldList]="fields" (submitted)="onSave($event)"></app-areus-form>
+  <div class="col-6 offset-3 mt-3">
+    <form *ngIf="(book$ | async) as book" #editForm="ngForm" (ngSubmit)="onSave(editForm)">
+      <input name="_id" type="hidden" [(ngModel)]="book._id">
+      <div class="form-group">
+        <label for="">Writer</label>
+        <input class="form-control" type="text" name="writer" [(ngModel)]="book.writer">
+      </div>
+      <div class="form-group">
+        <label for="">Title</label>
+        <input class="form-control" type="text" name="title" [(ngModel)]="book.title">
+      </div>
+      <div class="form-group">
+        <label for="">Length</label>
+        <input class="form-control" type="text" name="length" [(ngModel)]="book.length">
+      </div>
+      <div class="form-group">
+        <label for="">Style</label>
+        <input class="form-control" type="text" name="style" [(ngModel)]="book.style">
+      </div>
+      <div class="form-group">
+        <label for="">On loan</label>
+        <input type="checkbox" name="onloan" [(ngModel)]="book.onloan">
+      </div>
+
+      <button type="submit" [disabled]="editForm.invalid" class="btn btn-primary w-100 mt-3 mb-3">
+        <i class="fas fa-save"></i> Update the Book
+      </button>
+
+      <button type="button" class="btn btn-danger w-100 mt-3 mb-3" (click)="delete(book)">
+        <i class="fas fa-trash"></i> Delete the Book
+      </button>
+    </form>
   </div>
 </div>

@@ -1,25 +1,38 @@
 const mongoose = require('mongoose');
 
 const BookSchema = mongoose.Schema({
-    writer: String,
-    title: String,
-    length: Number,
-    style: String,
-    onloan: Boolean,
-    posts: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Post'
-        }
-    ]
+    writer: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    length: {
+      type: Number,
+      required: true,
+    },
+    style: {
+      type: String,
+    },
+    onloan: {
+      type: Boolean,
+      default: true,
+    }
 }, {
     timestamps: true
 });
 
 module.exports = mongoose.model('Book', BookSchema);
-// _id: string = '';
-//     writer: string = '';
-//     title: string = '';
-//     length: number = 0;
-//     style: string = '';
-//     onloan: boolean = false
+
+/*
+export class Book {
+  _id: string = '';
+    writer: string = '';
+    title: string = '';
+    length: number = 0;
+    style: string = '';
+    onloan: boolean = false;
+}
+*/

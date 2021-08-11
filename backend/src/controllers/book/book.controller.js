@@ -3,16 +3,21 @@ const createError = require('http-errors');
 
 const bookService = require('./book.service');
 
+// Create a new book.
 exports.create = (req, res, next) => {
-    const { writer, title} = req.body;
-    if (!writer || title) {
+    const { writer, title, length, style, onloan } = req.body;
+    if (!writer || !title || !length || !onloan) {
         return next(
             new createError.BadRequest("Missing properties!")
         );
     }
 
     const newBook = {
-       writer, title, length: length || 0, style: style || '', onloan: true || false
+        writer: writer,
+        title: title,
+        length: length,
+        style: style,
+        onloan: onloan,
     };
 
     return bookService.create(newBook)
@@ -42,14 +47,21 @@ exports.findOne = (req, res, next) => {
 
 exports.update = (req, res, next) => {
     const id = req.params.id;
-    const { writer, title} = req.body;
-    if (!writer || title) {
+    const { writer, title, length, style, onloan } = req.body;
+    if (!writer || !title || !length || !onloan) {
         return next(
             new createError.BadRequest("Missing properties!")
         );
     }
 
-    return bookService.update(req.params.id, req.body)
+    const update = {
+        writer: writer,
+        title: title,
+        length: length,
+        style: style,
+        onloan: onloan,
+    };
+    return bookService.update(req.params.id, update)
         .then(book => {
             res.json(book);
         })

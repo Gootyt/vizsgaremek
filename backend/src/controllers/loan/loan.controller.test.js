@@ -8,30 +8,11 @@ jest.mock('./loan.service');
 
 describe("loan controler", () => {
     const mockData = [{
-        "id": 1,
-        "first_name": "Fiorenze",
-        "last_name": "Dyneley",
-        "email": "fdyneley0@narod.ru"
-    }, {
-        "id": 2,
-        "first_name": "Owen",
-        "last_name": "Jirka",
-        "email": "ojirka1@squidoo.com"
-    }, {
-        "id": 3,
-        "first_name": "Terra",
-        "last_name": "Hurdman",
-        "email": "thurdman2@reverbnation.com"
-    }, {
-        "id": 4,
-        "first_name": "Thomasin",
-        "last_name": "de Keep",
-        "email": "tdekeep3@fc2.com"
-    }, {
-        "id": 5,
-        "first_name": "Lawrence",
-        "last_name": "Tearle",
-        "email": "ltearle4@infoseek.co.jp"
+  		"_id": "611b2196fc13ae7d6000019c"	
+  		"borrower": {"_id": "611977d56d34ab001467911d"},
+ 		 "loanedbook": {"_id": "611b13dcfc13ae18ce000000"},
+ 		 "loandate": "2021-08-06 07:22:46",
+ 		 "loanend": "2021-09-27 10:43:44",
     }];
 
     let response;
@@ -43,19 +24,19 @@ describe("loan controler", () => {
     });
 
     test("find one with valid id", () => {
-        const PERSON_ID = 1;
+        const LOAN_ID = 1;
 
         const request = mockRequest({
             params: {
-                id: PERSON_ID
+                id: LOAN_ID
             }
         });
 
         return loanController.findOne(request, response, nextFunction)
             .then( () => {
-                expect(loanService.findOne).toBeCalledWith(PERSON_ID);
+                expect(loanService.findOne).toBeCalledWith(LOAN_ID);
                 expect(response.json).toBeCalledWith(
-                    mockData.find(p => p.id === PERSON_ID)
+                    mockData.find(p => p.id === LOAN_ID)
                 );                
             })
     });

@@ -11,9 +11,9 @@ export class BookService extends BaseService<Book> {
 
   constructor(
     public config: ConfigService,
-    public http: HttpClient, 
+    public http: HttpClient,
   ) {
     super(config, http);
     this.entity = 'books';
-   }
+  }
 }
